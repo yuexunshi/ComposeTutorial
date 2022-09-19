@@ -14,9 +14,9 @@ internal class TodoRepository {
      suspend fun getTodoList(): List<Todo> {
         delay(1000L)
         return listOf(
-            Todo(false, "王老吉"),
-            Todo(false, "红牛"),
-            Todo(false, "椰汁"),
+            Todo(false, "喝红牛"),
+            Todo(false, "吃牛排"),
+            Todo(false, "去撸铁"),
         )
     }
 }
