@@ -6,9 +6,9 @@ import com.asi.mvi.contract.UiState
 
 
 internal data class TodoState(
-    val isShowAddDialog: Boolean=false,
+    val isShowAddDialog: Boolean = false,
     val isLoading: Boolean = false,
-    val goodsList: List<Todo> = listOf(),
+    val todoList: List<Todo> = listOf(),
 ) : UiState
 
 internal sealed interface TodoEvent : UiEvent {

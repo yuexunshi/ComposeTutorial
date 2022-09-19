@@ -156,7 +156,7 @@ abstract class BaseViewModel< S : UiState, E : UiEvent,F : UiEffect>  : ViewMode
   internal data class TodoState(
       val isShowAddDialog: Boolean=false,
       val isLoading: Boolean = false,
-      val goodsList: List<Todo> = listOf(),
+      val todoList: List<Todo> = listOf(),
   ) : UiState
   ```
 
@@ -224,8 +224,8 @@ internal fun TodoScreen(
 //    }
     when {
         state.isLoading -> ContentWithProgress()
-        state.goodsList.isNotEmpty() -> TodoListContent(
-            state.goodsList,
+        state.todoList.isNotEmpty() -> TodoListContent(
+            state.todoList,
             state.isShowAddDialog,
             onItemCheckedChanged = { index, isChecked ->
                 viewModel.sendEvent(TodoEvent.OnItemCheckedChanged(index, isChecked))
@@ -377,8 +377,8 @@ internal class TodoViewModel :
 
     private fun getTodo() {
         viewModelScope.launch {
-            val goodsList = repository.getTodoList()
-         sendEvent(TodoEvent.ShowData(goodsList))
+            val todoList = repository.getTodoList()
+         sendEvent(TodoEvent.ShowData(todoList))
       }
    }
 
@@ -387,13 +387,13 @@ internal class TodoViewModel :
    override suspend fun handleEvent(event: TodoEvent, state: TodoState): TodoState? {
       return when (event) {
          is TodoEvent.AddNewItem -> {
-            val newList = state.goodsList.toMutableList()
+            val newList = state.todoList.toMutableList()
             newList.add(
-               index = state.goodsList.size,
+               index = state.todoList.size,
                element = Todo(false, event.text),
             )
             state.copy(
-               goodsList = newList,
+               todoList = newList,
                isShowAddDialog = false
             )
          }
@@ -402,14 +402,14 @@ internal class TodoViewModel :
             isShowAddDialog = event.show
          )
          is TodoEvent.OnItemCheckedChanged -> {
-                val newList = state.goodsList.toMutableList()
+                val newList = state.todoList.toMutableList()
                 newList[event.index] = newList[event.index].copy(isChecked = event.isChecked)
                 if (event.isChecked) {
                     sendEffect(TodoEffect.Completed(newList[event.index].text))
                 }
-                state.copy(goodsList = newList)
+                state.copy(todoList = newList)
             }
-         is TodoEvent.ShowData -> state.copy(isLoading = false, goodsList = event.items)
+         is TodoEvent.ShowData -> state.copy(isLoading = false, todoList = event.items)
 
       }
    }
