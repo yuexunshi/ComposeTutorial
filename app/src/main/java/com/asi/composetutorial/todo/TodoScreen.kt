@@ -1,6 +1,5 @@
 package com.asi.composetutorial.todo
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,7 +33,6 @@ internal fun TodoScreen(
     val context = LocalContext.current
 
     viewModel.collectSideEffect { effect ->
-        Log.e("", "TodoScreen: collectSideEffect")
         when (effect) {
             is TodoEffect.Completed -> Toast.makeText(context,
                 "${effect.text}已完成",
@@ -44,8 +42,6 @@ internal fun TodoScreen(
     }
 //    LaunchedEffect(Unit) {
 //        viewModel.uiEffect.collect { effect ->
-//            Log.e("", "TodoScreen: LaunchedEffect")
-//
 //            when (effect) {
 //                is TodoEffect.Completed -> Toast.makeText(context,
 //                    "${effect.text}已完成",
