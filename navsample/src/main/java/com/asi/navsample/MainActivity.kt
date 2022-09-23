@@ -6,10 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.composable
+import com.asi.navigation.RouterHost
+import com.asi.navsample.model.User
+import com.asi.navsample.nav.Screen
+import com.asi.navsample.page.FourScreen
+import com.asi.navsample.page.OneScreen
+import com.asi.navsample.page.ThreeScreen
+import com.asi.navsample.page.TwoScreen
 import com.asi.navsample.ui.theme.ComposeTutorialTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,22 +25,23 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    RouterHost(Screen.One.route) {
+                        composable(Screen.One.route) { OneScreen() }
+                        composable(Screen.Two.route) { TwoScreen() }
+                        composable(Screen.Four.route, arguments = Screen.Four.arguments) {
+                            val user = it.arguments?.getParcelable<User>(Screen.Four.ARG)
+                                ?: return@composable
+                            FourScreen(user)
+                        }
+                        composable(Screen.Three.route, arguments = Screen.Three.arguments) {
+                            val channelId =
+                                it.arguments?.getString(Screen.Three.ARG) ?: return@composable
+                            ThreeScreen(channelId)
+                        }
+                    }
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ComposeTutorialTheme {
-        Greeting("Android")
-    }
-}

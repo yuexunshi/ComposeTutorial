@@ -9,7 +9,7 @@ import androidx.navigation.NavOptions
  * @Description TODO
  * @createTime 2022年09月22日 17:40:00
  */
-interface IRouter {
+interface INav {
     /**
      * 导航
      * @param name String
@@ -20,11 +20,9 @@ interface IRouter {
     /**
      * 弹出当前栈并导航
      * @param name String
-     * @param inclusive Boolean
-     * @param saveState Boolean
      */
     fun popUpTo(
-        name: String, inclusive: Boolean, saveState: Boolean = false,
+        name: String,
     )
 
     /**

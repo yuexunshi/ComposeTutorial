@@ -17,11 +17,11 @@ import androidx.navigation.compose.rememberNavController
  */
 
 @Composable
-fun RouteNavHost(
+fun RouterHost(
     startDestination: String, builder: NavGraphBuilder.() -> Unit,
 ) {
     val navController = rememberNavController()
-    val destination by Router.destination.collectAsState()
+    val destination by NavFlow.destination.collectAsState()
     LaunchedEffect(destination) {
         handleNavigationCommands(navController)
     }

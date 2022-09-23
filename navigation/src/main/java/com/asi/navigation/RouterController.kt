@@ -11,33 +11,32 @@ import androidx.navigation.NavController
  */
 
 fun handleNavigationCommands(navController: NavController) {
-    navController.handleComposeNavigationCommand(Router.destination.value)
+    navController.handleComposeNavigationCommand(NavFlow.destination.value)
 }
 
-private fun NavController.handleComposeNavigationCommand(navigationCommand: NavigationCommand) {
+private fun NavController.handleComposeNavigationCommand(navigationCommand: RouterCommand) {
     when (navigationCommand) {
-        is NavigationCommand.To -> navigate(navigationCommand.route, navigationCommand.options)
+        is RouterCommand.To -> navigate(navigationCommand.route, navigationCommand.options)
 
-        is NavigationCommand.PopUpTo -> navigate(
+        is RouterCommand.PopUpTo -> navigate(
             navigationCommand.route,
         ) {
             currentBackStackEntry?.destination?.route?.let {
                 popBackStack()
             }
         }
-        is NavigationCommand.Back -> popBackStack()
-        is NavigationCommand.OffUntilTo -> navigate(navigationCommand.route) {
-            Router.popUpTo(navigationCommand.untilRoute,
+        is RouterCommand.Back -> popBackStack()
+        is RouterCommand.OffUntilTo -> navigate(navigationCommand.route) {
+            popBackStack(navigationCommand.untilRoute,
                 inclusive = navigationCommand.inclusive)
         }
 
-        is NavigationCommand.OffAllTo -> navigate(navigationCommand.route) {
+        is RouterCommand.OffAllTo -> navigate(navigationCommand.route) {
             popUpTo(0)
         }
-        is NavigationCommand.OffUntil -> popBackStack(route = navigationCommand.route,
-            false,
+        is RouterCommand.OffUntil -> popBackStack(route = navigationCommand.route,
+            navigationCommand.inclusive,
             navigationCommand.saveState)
-        Router.Default -> {
-        }
+        NavFlow.Default -> {}
     }
 }
