@@ -7,7 +7,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.asi.navigation.Nav
 import com.asi.navsample.model.User
-import com.asi.navsample.nav.Screen
+import com.asi.navsample.nav.OneDestination
+import com.asi.navsample.nav.TwoDestination
 
 /**
  * @ClassName OneScreen.java
@@ -24,12 +25,12 @@ fun FourScreen(user: User) {
         Text(text = "FourScreen")
         Text(text = "name=${user.name}")
         Button(onClick = {
-            Nav.offUntil(Screen.Two.route)
+            Nav.offUntil(TwoDestination.route)
         }) {
             Text(text = "offUntilTwoScreen")
         }
         Button(onClick = {
-            Nav.offUntil(Screen.One.route)
+            Nav.offUntil(OneDestination.route)
         }) {
             Text(text = "offUntilOneScreen")
         }

@@ -6,10 +6,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import com.asi.navigation.Nav
-import com.asi.navsample.nav.Screen
+import com.asi.navsample.model.User
+import com.asi.navsample.nav.FiveDestination
+import com.asi.navsample.nav.FourDestination
+import com.asi.navsample.nav.ThreeDestination
+import com.asi.navsample.nav.TwoDestination
 
 /**
  * @ClassName OneScreen.java
@@ -24,20 +26,29 @@ fun OneScreen() {
     BackHandler(onBack = {
         Log.e("==", "OneScreen:BackHandler ")
     })
-    SideEffect {
-        Log.e("==", "SideEffect ")
-    }
 
-    LaunchedEffect(Unit) {
-        Log.e("==", "LaunchedEffect ")
-    }
     Column {
         Text(text = "OneScreen")
 
         Button(onClick = {
-            Nav.to(Screen.Two.route)
+            Nav.to(TwoDestination.route)
         }) {
             Text(text = "去TwoScreen")
+        }
+        Button(onClick = {
+            Nav.to(ThreeDestination.createRoute("来自首页"))
+        }) {
+            Text(text = "去ThreeScreen")
+        }
+        Button(onClick = {
+            Nav.to(FourDestination.createRoute(User("来着首页", "110")))
+        }) {
+            Text(text = "去FourScreen")
+        }
+        Button(onClick = {
+            Nav.to(FiveDestination.createRoute(20, "来自首页"))
+        }) {
+            Text(text = "去FiveScreen")
         }
     }
 }

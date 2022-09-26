@@ -5,7 +5,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.asi.navigation.Nav
-import com.asi.navsample.nav.Screen
+import com.asi.navsample.nav.ThreeDestination
 
 
 /**
@@ -23,16 +23,15 @@ fun TwoScreen() {
         Text(text = "TwoScreen")
 
         Button(onClick = {
-            Nav.to(Screen.Three.createRoute("去ThreeScreen"))
+            Nav.to(ThreeDestination.createRoute("来自Two"))
         }) {
             Text(text = "去ThreeScreen")
         }
         Button(onClick = {
-            Nav.popUpTo(Screen.Three.createRoute("replace去ThreeScreen"))
+            Nav.popUpTo(ThreeDestination.createRoute("replace来自Two"))
         }) {
             Text(text = "replace去ThreeScreen")
         }
-
     }
 
 }
