@@ -1,10 +1,8 @@
 package com.asi.navsample.model
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.navigation.NavType
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 /**
@@ -25,10 +23,6 @@ class NavUserType : NavType<User>(isNullableAllowed = false) {
 
     override fun parseValue(value: String): User {
         return Json.decodeFromString(value)
-    }
-
-    override fun toString(): String {
-        return Uri.encode(Json.encodeToString(this))
     }
 
 }

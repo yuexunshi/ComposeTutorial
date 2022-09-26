@@ -1,7 +1,10 @@
 package com.asi.navsample.model
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 /**
  * @ClassName User.java
@@ -16,4 +19,8 @@ import kotlinx.parcelize.Parcelize
 data class User(
     val name: String,
     val phone: String,
-) : Parcelable
+) : Parcelable {
+    override fun toString(): String {
+        return Uri.encode(Json.encodeToString(this))
+    }
+}

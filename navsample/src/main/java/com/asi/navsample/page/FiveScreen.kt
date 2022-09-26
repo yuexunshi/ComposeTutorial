@@ -1,14 +1,12 @@
 package com.asi.navsample.page
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import com.asi.navigation.Nav
-import com.asi.navsample.model.User
 import com.asi.navsample.nav.OneDestination
-import com.asi.navsample.nav.TwoDestination
+
 
 /**
  * @ClassName OneScreen.java
@@ -19,21 +17,20 @@ import com.asi.navsample.nav.TwoDestination
  */
 
 @Composable
-fun FourScreen(user: User) {
+fun FiveScreen(age: Int, name: String) {
 
     Column() {
-        Text(text = "FourScreen")
-        Text(text = "name=${user.name}")
-        Button(onClick = {
-            Nav.offAllTo(TwoDestination.route)
-        }) {
-            Text(text = "offUntilTwoScreen")
-        }
+        Text(text = "FiveScreen")
+        Text(text = "age=$age||name=$name")
         Button(onClick = {
             Nav.offAllTo(OneDestination.route)
         }) {
-            Text(text = "offUntilOneScreen")
+            Text(text = "回到OneScreen")
+        }
+        Button(onClick = {
+            Nav.back()
+        }) {
+            Text(text = "back")
         }
     }
-
 }

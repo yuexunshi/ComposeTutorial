@@ -1,9 +1,7 @@
 package com.asi.navigation
 
-import androidx.navigation.NavOptions
-
 /**
- * @ClassName Router.java
+ * @ClassName Nav.java
  * @author usopp
  * @version 1.0.0
  * @Description TODO
@@ -13,46 +11,42 @@ import androidx.navigation.NavOptions
 
 object Nav : INav {
 
-    private fun navigate(destination: RouterCommand) {
-        NavFlow.navigate(destination)
+    private fun navigate(destination: NavIntent) {
+        NavChannel.navigate(destination)
+    }
+
+    override fun back(route: String?, inclusive: Boolean) {
+        navigate(NavIntent.Back(
+            route = route,
+            inclusive = inclusive,
+        ))
     }
 
 
-    override fun to(name: String, option: NavOptions?) {
-        navigate(RouterCommand.To(name, option))
-    }
-
-
-    override fun popUpTo(
-        name: String,
-    ) {
-        navigate(RouterCommand.PopUpTo(name))
-    }
-
-    override fun back() {
-        navigate(RouterCommand.Back)
-    }
-
-    override fun offUntilTo(
+    override fun to(
         route: String,
-        untilRoute: String,
+        popUpToRoute: String?,
         inclusive: Boolean,
-        saveState: Boolean,
+        isSingleTop: Boolean,
     ) {
-        navigate(RouterCommand.OffUntilTo(route, untilRoute, inclusive, saveState))
+        navigate(NavIntent.To(
+            route = route,
+            popUpToRoute = popUpToRoute,
+            inclusive = inclusive,
+            isSingleTop = isSingleTop,
+        ))
     }
 
+    override fun replace(route: String, isSingleTop: Boolean) {
+        navigate(NavIntent.Replace(
+            route = route,
+            isSingleTop = isSingleTop,
+        ))
 
-    override fun offUntil(
-        untilRoute: String,
-        inclusive: Boolean,
-        saveState: Boolean,
-    ) {
-        navigate(RouterCommand.OffUntil(untilRoute, inclusive, saveState))
     }
 
     override fun offAllTo(route: String) {
-        navigate(RouterCommand.OffAllTo(route))
+        navigate(NavIntent.OffAllTo(route))
     }
 
 
