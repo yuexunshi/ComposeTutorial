@@ -4,6 +4,17 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/version-gradle" name="version-gradle">
+                <projects>
+                  <project path="$PROJECT_DIR$/version-gradle" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -15,6 +26,7 @@
             <option value="$PROJECT_DIR$/mvi" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/navsample" />
+            <option value="$PROJECT_DIR$/version-gradle" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -17,3 +17,5 @@ include ':app'
 include ':mvi'
 include ':navigation'
 include ':navsample'
+includeBuild("version-gradle")
+
